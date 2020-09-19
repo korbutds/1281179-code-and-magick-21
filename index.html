@@ -182,7 +182,7 @@
 <script>
   let fireballSize = 22;
 
-  let getFireballSpeed = function (isLeft) {
+  const getFireballSpeed = function (isLeft) {
     return isLeft ? 2: 5;
   };
 
@@ -190,13 +190,17 @@
 
   let wizardWidth = 70;
 
-  let getWizardHeight = function () {
+  const getWizardHeight = function () {
     return wizardWidth * 1.337;
   };
 
-  let getWizardX = function () {};
+  const getWizardX = function (gameWidth) {
+    return (gameWidth - wizardWidth) / 2;
+  };
 
-  let getWizardY = function () {};
+  const getWizardY = function (gameHeight) {
+    return 1 / 3 * gameHeight - getWizardHeight();
+  };
 </script>
 <script src="js/game.js"></script>
 
