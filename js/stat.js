@@ -16,12 +16,12 @@ const COLUMN_WIDTH = 40;
 const COLUMN_MAX_HEIGHT = 150;
 const COLUMN_HERO_FILL = `rgba(255, 0, 0, 1)`;
 
-const renderCloud = function (ctx, x, y, color) {
+const renderCloud = (ctx, x, y, color) => {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGTH);
 };
 
-const getMaxElement = function (arr) {
+const getMaxElement = (arr) => {
   let maxElement = arr[0];
   for (let i = 1; i < arr.length; i++) {
     if (arr[i] > maxElement) {
@@ -31,7 +31,7 @@ const getMaxElement = function (arr) {
   return maxElement;
 };
 
-window.renderStatistics = function (ctx, names, times) {
+window.renderStatistics = (ctx, names, times) => {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, CLOUD_SHADOW_COLOR);
   renderCloud(ctx, CLOUD_X, CLOUD_Y, CLOUD_COLOR);
 
