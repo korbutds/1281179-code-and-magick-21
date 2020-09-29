@@ -16,7 +16,7 @@ const getRandomArrayElement = (array) => {
   return array[getRandomIntInclusive(0, array.length - 1)];
 };
 
-const creatWizardsDataArray = (count) => {
+const createWizardsDataArray = (count) => {
   const wizards = [];
   for (let i = 0; i < count; i++) {
     let wizard = {
@@ -32,7 +32,7 @@ const creatWizardsDataArray = (count) => {
 
 setup.classList.remove(`hidden`);
 
-const creatWizardElement = function (element) {
+const createWizardElement = function (element) {
   let wizardElement = wizardsTemplate.cloneNode(true);
   wizardElement.querySelector(`.setup-similar-label`).textContent = element.name;
   wizardElement.querySelector(`.wizard-coat`).style.fill = element.coatColor;
@@ -41,15 +41,15 @@ const creatWizardElement = function (element) {
   return wizardElement;
 };
 
-const creatWizardsFragment = (array) => {
+const createWizardsFragment = (array) => {
   let fragment = document.createDocumentFragment();
   for (let i = 0; i < array.length; i++) {
-    fragment.appendChild(creatWizardElement(array[i]));
+    fragment.appendChild(createWizardElement(array[i]));
   }
 
   return fragment;
 };
 
-wizardsList.appendChild(creatWizardsFragment(creatWizardsDataArray(4)));
+wizardsList.appendChild(createWizardsFragment(createWizardsDataArray(4)));
 
 document.querySelector(`.setup-similar`).classList.remove(`hidden`);
