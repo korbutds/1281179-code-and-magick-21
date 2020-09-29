@@ -1,66 +1,55 @@
 'use strict';
 
-let setup = document.querySelector(`.setup`);
-let wizardsTemplate = document.querySelector(`#similar-wizard-template`).content.querySelector(`.setup-similar-item`);
-let wizardsList = document.querySelector(`.setup-similar-list`);
-let names = [`Иван`, `Хуан Себастьян`, `Мария`, `Кристоф`, `Виктор`, `Юлия`, `Люпита`, `Вашингтон`];
-let surnames = [`да Марья`, `Верон`, `Мирабелла`, `Вальц`, `Онопко`, `Топольницкая`, `Нионго`, `Ирвинг`];
-let coatColors = [`rgb(101, 137, 164)`, `rgb(241, 43, 107)`, `rgb(146, 100, 161)`, `rgb(56, 159, 117)`, `rgb(215, 210, 55)`, `rgb(0, 0, 0)`];
-let eyesColors = [`black`, `red`, `blue`, `yellow`, `green`];
-let wizards = [];
-let randomNames = [];
+const setup = document.querySelector(`.setup`);
+const wizardsTemplate = document.querySelector(`#similar-wizard-template`).content.querySelector(`.setup-similar-item`);
+const wizardsList = document.querySelector(`.setup-similar-list`);
+const wizardsNames = [`Иван`, `Хуан Себастьян`, `Мария`, `Кристоф`, `Виктор`, `Юлия`, `Люпита`, `Вашингтон`];
+const wizardsSurnames = [`да Марья`, `Верон`, `Мирабелла`, `Вальц`, `Онопко`, `Топольницкая`, `Нионго`, `Ирвинг`];
+const wizardsCoatsColors = [`rgb(101, 137, 164)`, `rgb(241, 43, 107)`, `rgb(146, 100, 161)`, `rgb(56, 159, 117)`, `rgb(215, 210, 55)`, `rgb(0, 0, 0)`];
+const eyesColors = [`black`, `red`, `blue`, `yellow`, `green`];
 
-const makeRandomArr = (arr) => {
-  // Функция возвращает массив, созданный из исходного. Возможно повторение значений.
-  let newArr = [];
-  for (let i = 0; i < arr.length; i++) {
-    newArr.push(arr[Math.round(Math.random() * (arr.length - 1))]);
+const getRandomIntInclusive = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const getRandomArrayElement = (array) => {
+  return array[getRandomIntInclusive(0, array.length - 1)];
+};
+
+const creatWizardsDataArray = (count) => {
+  const wizards = [];
+  for (let i = 0; i < count; i++) {
+    let wizard = {
+      name: `${getRandomArrayElement(wizardsNames)} ${getRandomArrayElement(wizardsSurnames)}`,
+      coatColor: getRandomArrayElement(wizardsCoatsColors),
+      eyesColor: getRandomArrayElement(eyesColors)
+    };
+    wizards.push(wizard);
   }
-  return newArr;
+
+  return wizards;
 };
-
-const wizardGenerator = (wizardName, coat, eyes) => {
-  let wizard = {
-    name: wizardName,
-    coatColor: coat,
-    eyesColor: eyes
-  };
-  return wizard;
-};
-
-const randomArrIndex = (array) => {
-  return Math.round(Math.random() * (array.length - 1));
-};
-
-let shuffleNames = makeRandomArr(names);
-let shuffleSurnames = makeRandomArr(surnames);
-
-
-for (let i = 0; i < shuffleNames.length; i++) {
-  randomNames.push(`${shuffleNames[i]} ${shuffleSurnames[i]}`);
-}
-
-for (let i = 0; i < 4; i++) {
-  wizards.push(wizardGenerator(randomNames[i], coatColors[randomArrIndex(coatColors)], eyesColors[randomArrIndex(eyesColors)]));
-}
-
 
 setup.classList.remove(`hidden`);
 
-const renderWizard = function (wizard) {
+const creatWizardElement = function (element) {
   let wizardElement = wizardsTemplate.cloneNode(true);
-  wizardElement.querySelector(`.setup-similar-label`).textContent = wizard.name;
-  wizardElement.querySelector(`.wizard-coat`).style.fill = wizard.coatColor;
-  wizardElement.querySelector(`.wizard-eyes`).style.fill = wizard.eyesColor;
+  wizardElement.querySelector(`.setup-similar-label`).textContent = element.name;
+  wizardElement.querySelector(`.wizard-coat`).style.fill = element.coatColor;
+  wizardElement.querySelector(`.wizard-eyes`).style.fill = element.eyesColor;
 
   return wizardElement;
 };
 
-let fragment = document.createDocumentFragment();
+const creatWizardsFragment = (array) => {
+  let fragment = document.createDocumentFragment();
+  for (let i = 0; i < array.length; i++) {
+    fragment.appendChild(creatWizardElement(array[i]));
+  }
 
-for (let i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
-}
+  return fragment;
+};
 
-wizardsList.appendChild(fragment);
+wizardsList.appendChild(creatWizardsFragment(creatWizardsDataArray(4)));
+
 document.querySelector(`.setup-similar`).classList.remove(`hidden`);
