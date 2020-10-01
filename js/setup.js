@@ -3,16 +3,50 @@
 const wizardsTemplate = document.querySelector(`#similar-wizard-template`).content.querySelector(`.setup-similar-item`);
 const setup = document.querySelector(`.setup`);
 const wizardsList = setup.querySelector(`.setup-similar-list`);
-const wizardsNames = [`Иван`, `Хуан Себастьян`, `Мария`, `Кристоф`, `Виктор`, `Юлия`, `Люпита`, `Вашингтон`];
-const wizardsSurnames = [`да Марья`, `Верон`, `Мирабелла`, `Вальц`, `Онопко`, `Топольницкая`, `Нионго`, `Ирвинг`];
-const wizardsCoatsColors = [`rgb(101, 137, 164)`, `rgb(241, 43, 107)`, `rgb(146, 100, 161)`, `rgb(56, 159, 117)`, `rgb(215, 210, 55)`, `rgb(0, 0, 0)`];
+const wizardsNames = [
+  `Иван`,
+  `Хуан Себастьян`,
+  `Мария`,
+  `Кристоф`,
+  `Виктор`,
+  `Юлия`,
+  `Люпита`,
+  `Вашингтон`
+];
+const wizardsSurnames = [
+  `да Марья`,
+  `Верон`,
+  `Мирабелла`,
+  `Вальц`,
+  `Онопко`,
+  `Топольницкая`,
+  `Нионго`,
+  `Ирвинг`
+];
+const wizardsCoatsColors = [
+  `rgb(101, 137, 164)`,
+  `rgb(241, 43, 107)`,
+  `rgb(146, 100, 161)`,
+  `rgb(56, 159, 117)`,
+  `rgb(215, 210, 55)`,
+  `rgb(0, 0, 0)`
+];
 const eyesColors = [`black`, `red`, `blue`, `yellow`, `green`];
+const fireballColor = [
+  `#ee4830`,
+  `#30a8ee`,
+  `#5ce6c0`,
+  `#e848d5`,
+  `#e6e848`
+];
 const setupOpen = document.querySelector(`.setup-open`);
 const setupClose = setup.querySelector(`.setup-close`);
 const setupUserName = setup.querySelector(`.setup-user-name`);
 const MIN_USER_LENGTH = 2;
 const MAX_USER_LENGTH = 25;
-
+const setupPlayer = setup.querySelector(`.setup-player`);
+const setupWizard = setupPlayer.querySelector(`.setup-wizard`);
+const fireball = setup.querySelector(`.setup-fireball-wrap`);
 const getRandomIntInclusive = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
@@ -111,35 +145,15 @@ setupUserName.addEventListener(`input`, () => {
   setupUserName.reportValidity();
 });
 
-/*
-Задача
+setupWizard.addEventListener(`click`, (evt) =>{
+  const targetId = evt.target.getAttributeNS(`http://www.w3.org/1999/xlink`, `href`).slice(1);
+  if (targetId === `wizard-coat`) {
+    evt.target.style.fill = wizardsCoatsColors[getRandomIntInclusive(0, wizardsCoatsColors.length - 1)];
+  } else if (targetId === `wizard-eyes`) {
+    evt.target.style.fill = eyesColors[getRandomIntInclusive(0, eyesColors.length - 1)];
+  }
+});
 
-Изменение цвета мантии персонажа по нажатию. Цвет мантии .setup-wizard .wizard-coat должен обновляться по нажатию на неё. Цвет мантии задаётся через изменение инлайнового CSS-свойства fill для элемента. Цвет должен сменяться произвольным образом на один из следующих цветов:
-
-rgb (101, 137, 164)
-rgb (241, 43, 107)
-rgb (146, 100, 161)
-rgb (56, 159, 117)
-rgb (215, 210, 55)
-rgb (0, 0, 0)
-Изменение цвета глаз персонажа по нажатию. Цвет глаз волшебника меняется по нажатию на блок .setup-wizard .wizard-eyes. Возможные варианты цвета глаз персонажа:
-
-black
-red
-blue
-yellow
-green
-Изменение цвета фаерболов по нажатию. Цвет задаётся через изменение фона у блока .setup-fireball-wrap. Возможные варианты цвета:
-
-#ee4830
-#30a8ee
-#5ce6c0
-#e848d5
-#e6e848
-Для того, чтобы на сервер отправились правильные данные, при изменении параметров персонажа должно изменяться и значение соответствующего скрытого тега <input>.
-
-Отправка формы. Форма должна отправляться по адресу https://javascript.pages.academy/code-and-magick методом POST с типом multipart/form-data
-Ограничений на алгоритм выбора цвета нет: это может быть случайный выбор, а может быть изменение цвета по порядку в списке.
-
-Пример того, как может выглядеть персонаж после изменений:
-*/
+fireball.addEventListener(`click`, () => {
+  fireball.style.backgroundColor = fireballColor[getRandomIntInclusive(0, fireballColor.length - 1)];
+});
