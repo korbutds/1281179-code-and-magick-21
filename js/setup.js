@@ -46,6 +46,7 @@ const MIN_USER_LENGTH = 2;
 const MAX_USER_LENGTH = 25;
 const setupPlayer = setup.querySelector(`.setup-player`);
 const setupWizard = setupPlayer.querySelector(`.setup-wizard`);
+const wizardStyle = setupWizard.querySelector(`.wizard`);
 const fireball = setup.querySelector(`.setup-fireball-wrap`);
 const getRandomIntInclusive = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -145,7 +146,7 @@ setupUserName.addEventListener(`input`, () => {
   setupUserName.reportValidity();
 });
 
-setupWizard.addEventListener(`click`, (evt) =>{
+wizardStyle.addEventListener(`click`, (evt) =>{
   const targetId = evt.target.getAttributeNS(`http://www.w3.org/1999/xlink`, `href`).slice(1);
   if (targetId === `wizard-coat`) {
     evt.target.style.fill = wizardsCoatsColors[getRandomIntInclusive(0, wizardsCoatsColors.length - 1)];
