@@ -104,13 +104,11 @@ const onModalEscPress = (evt) => {
 
 const openModal = (element) => {
   element.classList.remove(`hidden`);
-
   document.addEventListener(`keydown`, onModalEscPress);
 };
 
 const closeModal = (element) => {
   element.classList.add(`hidden`);
-
   document.removeEventListener(`keydown`, onModalEscPress);
 };
 
