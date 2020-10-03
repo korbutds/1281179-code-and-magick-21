@@ -45,6 +45,9 @@ const setupUserName = setup.querySelector(`.setup-user-name`);
 const MIN_USER_LENGTH = 2;
 const MAX_USER_LENGTH = 25;
 const setupPlayer = setup.querySelector(`.setup-player`);
+const coatInput = setupPlayer.querySelector(`input[name = 'coat-color']`);
+const eyesInput = setupPlayer.querySelector(`input[name = 'eyes-color']`);
+const fireballInput = setupPlayer.querySelector(`input[name = 'fireball-color']`);
 const setupWizard = setupPlayer.querySelector(`.setup-wizard`);
 const wizardStyle = setupWizard.querySelector(`.wizard`);
 const fireball = setup.querySelector(`.setup-fireball-wrap`);
@@ -117,7 +120,6 @@ setupOpen.addEventListener(`click`, () => {
 
 setupOpen.addEventListener(`keydown`, (evt) => {
   if (evt.key === `Enter`) {
-    evt.preventDefault();
     openModal(setup);
   }
 });
@@ -128,7 +130,6 @@ setupClose.addEventListener(`click`, () => {
 
 setupClose.addEventListener(`keydown`, (evt) => {
   if (evt.key === `Enter`) {
-    evt.preventDefault();
     closeModal(setup);
   }
 });
@@ -146,15 +147,34 @@ setupUserName.addEventListener(`input`, () => {
   setupUserName.reportValidity();
 });
 
+const letChangeCoatFill = (evt) => {
+  const changeColor = wizardsCoatsColors[getRandomIntInclusive(0, wizardsCoatsColors.length - 1)];
+  coatInput.value = changeColor;
+  evt.target.style.fill = changeColor;
+};
+
+const letChangeEyesFill = (evt) => {
+  const changeColor = eyesColors[getRandomIntInclusive(0, eyesColors.length - 1)];
+  eyesInput.value = changeColor;
+  evt.target.style.fill = changeColor;
+};
+
+const letChangeFireballColor = () => {
+  const changeColor = fireballColor[getRandomIntInclusive(0, fireballColor.length - 1)];
+  fireballInput.value = changeColor;
+  fireball.style.backgroundColor = changeColor;
+};
+
+
 wizardStyle.addEventListener(`click`, (evt) =>{
   const targetId = evt.target.getAttributeNS(`http://www.w3.org/1999/xlink`, `href`).slice(1);
   if (targetId === `wizard-coat`) {
-    evt.target.style.fill = wizardsCoatsColors[getRandomIntInclusive(0, wizardsCoatsColors.length - 1)];
+    letChangeCoatFill(evt);
   } else if (targetId === `wizard-eyes`) {
-    evt.target.style.fill = eyesColors[getRandomIntInclusive(0, eyesColors.length - 1)];
+    letChangeEyesFill(evt);
   }
 });
 
 fireball.addEventListener(`click`, () => {
-  fireball.style.backgroundColor = fireballColor[getRandomIntInclusive(0, fireballColor.length - 1)];
+  letChangeFireballColor();
 });
