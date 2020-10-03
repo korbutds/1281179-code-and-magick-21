@@ -165,7 +165,6 @@ const letChangeFireballColor = () => {
   fireball.style.backgroundColor = changeColor;
 };
 
-
 wizardStyle.addEventListener(`click`, (evt) =>{
   const targetId = evt.target.getAttributeNS(`http://www.w3.org/1999/xlink`, `href`).slice(1);
   if (targetId === `wizard-coat`) {
