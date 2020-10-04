@@ -18,9 +18,9 @@
       </g>
       <g id="wizard-head">
         <polygon points="48 86 53 86 53 15 58 15 58 10 62 10 62 5 58 5 58 10 48 10 48 5 43 5 43 10 48 10 48 14 48 86"
-                 fill="#be3827"/>
+                fill="#be3827"/>
         <polygon points="9 37 19 37 19 23 48 23 48 28 53 28 53 42 48 42 48 51 14 51 14 46 9 46 9 37"
-                 fill="#fbd868"/>
+                fill="#fbd868"/>
         <rect x="33" y="39" width="10" height="5" fill="#bec1c3"/>
         <rect x="14" y="37" width="5" height="9" fill="#bec1c3"/>
         <polygon
@@ -61,7 +61,7 @@
 
   <div class="demo"></div>
 
-  <div class="setup-open">
+  <div class="setup-open" tabindex="0">
     <img src="img/user-1.jpg" class="setup-open-icon">
   </div>
 </header>
@@ -70,6 +70,7 @@
   <form class="setup-wizard-form"
         method="post"
         enctype="multipart/form-data"
+        action="https://javascript.pages.academy/code-and-magick"
         autocomplete="off">
 
     <div class="setup-title">
@@ -80,12 +81,12 @@
         </div>
         <label>
           <input type="text" name="username"
-                 maxlength="25" required
-                 class="setup-user-name" value="Синий Пендальф"/>
+                  maxlength="25" required
+                  class="setup-user-name" value="Синий Пендальф" minlength="2" maxlength="25"/>
         </label>
       </div>
 
-      <span class="setup-close">&times;</span>
+      <span class="setup-close" tabindex="0">&times;</span>
     </div>
 
 
@@ -120,7 +121,7 @@
 
       <div class="setup-fireball-wrap">
         <div class="setup-fireball"></div>
-        <input type="hidden" name="fireball-color" value="#ee4830">
+        <input type="hidden" name="fireball-color" value="#eeff30">
       </div>
 
       <div class="setup-artifacts" dropzone="move">
@@ -154,7 +155,7 @@
         <div class="setup-similar-list"><!--Список похожих персонажей--></div>
       </div>
 
-      <button class="button setup-submit">Сохранить</button>
+      <button class="button setup-submit" type="submit">Сохранить</button>
     </div>
   </form>
 </div>
