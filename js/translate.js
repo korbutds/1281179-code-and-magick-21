@@ -2,18 +2,20 @@
 
 (() => {
   const letTransformElement = (element, modal) => {
+
     element.addEventListener(`mousedown`, (evt) => {
       evt.preventDefault();
-
-      let moveFlag = false;
 
       let startCoords = {
         x: evt.clientX,
         y: evt.clientY
       };
 
+      let moveFlag = false;
+
       const onMouseMove = (moveEvt) => {
         moveEvt.preventDefault();
+
         moveFlag = true;
 
         const shift = {
@@ -28,15 +30,17 @@
 
         modal.style.top = `${modal.offsetTop - shift.y}px`;
         modal.style.left = `${modal.offsetLeft - shift.x}px`;
+
       };
 
       const onMouseUp = (upEvt) => {
         upEvt.preventDefault();
+
         document.removeEventListener(`mousemove`, onMouseMove);
         document.removeEventListener(`mouseup`, onMouseUp);
 
         if (moveFlag) {
-          let onClickPreventDefault = (clickEvt) => {
+          const onClickPreventDefault = (clickEvt) => {
             clickEvt.preventDefault();
             element.removeEventListener(`click`, onClickPreventDefault);
           };
@@ -44,11 +48,10 @@
         }
       };
 
-      element.addEventListener(`mousemove`, onMouseMove);
-      element.addEventListener(`mouseup`, onMouseUp);
+      document.addEventListener(`mousemove`, onMouseMove);
+      document.addEventListener(`mouseup`, onMouseUp);
     });
   };
-
   window.translate = {
     transformingElement: letTransformElement
   };
