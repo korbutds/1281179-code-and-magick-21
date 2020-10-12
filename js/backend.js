@@ -38,7 +38,7 @@
     const URL = `https://21.javascript.pages.academy/code-and-magick`;
     const xhr = new XMLHttpRequest();
     xhr.responseType = `json`;
-    xhr.addEventListener(`load`, function () {
+    xhr.addEventListener(`load`, () => {
       onSuccess(xhr.response);
     });
     xhr.open(`POST`, URL);
