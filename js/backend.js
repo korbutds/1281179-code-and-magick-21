@@ -2,36 +2,48 @@
 
 (() => {
 
-  const loadData = function (onLoad, onError) {
-    const URL = `https://21.javascript.pages.academy/code-and-magick/data`;
+  const errorCheck = (request, onLoad, onError) => {
     const STATUS_CODE = {
       OK: 200
     };
     const TIMEOUT_IN_MS = 10000;
 
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = `json`;
+    request.responseType = `json`;
 
-    xhr.addEventListener(`load`, function () {
-      if (xhr.status === STATUS_CODE.OK) {
-        onLoad(xhr.response);
+    request.addEventListener(`load`, () => {
+      if (request.status === STATUS_CODE.OK) {
+        onLoad(request.response);
       } else {
-        onError(`Статус ответа: ${xhr.status} ${xhr.statusText}`);
+        onError(`Статус ответа: ${request.status} ${request.statusText}`);
       }
     });
-    xhr.addEventListener(`error`, function () {
+    request.addEventListener(`error`, () => {
       onError(`Произошла ошибка соеденения`);
     });
-    xhr.addEventListener(`timeout`, function () {
-      onError(`Запрос не успел выполниться за ${xhr.timeout}мс`);
+    request.addEventListener(`timeout`, () => {
+      onError(`Запрос не успел выполниться за ${request.timeout}мс`);
     });
-    xhr.timeout = TIMEOUT_IN_MS;
-    xhr.open(`GET`, URL);
+    request.timeout = TIMEOUT_IN_MS;
+  };
 
+  const loadData = (onLoad, onError) => {
+    const URL = `https://21.javascript.pages.academy/code-and-magick/data`;
+    const xhr = new XMLHttpRequest();
+    errorCheck(xhr, onLoad, onError);
+    xhr.open(`GET`, URL);
     xhr.send();
   };
 
-  const saveData = () => {};
+  const saveData = (data, onSuccess) => {
+    const URL = `https://21.javascript.pages.academy/code-and-magick`;
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = `json`;
+    xhr.addEventListener(`load`, function () {
+      onSuccess(xhr.response);
+    });
+    xhr.open(`POST`, URL);
+    xhr.send(data);
+  };
 
   window.backend = {
     load: loadData,

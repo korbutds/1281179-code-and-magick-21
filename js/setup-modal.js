@@ -41,4 +41,10 @@
       closeModal(setup);
     }
   });
+
+  const form = setup.querySelector(`form`);
+  form.addEventListener(`submit`, (evt) => {
+    window.backend.save(new FormData(form), closeModal(setup));
+    evt.preventDefault();
+  });
 })();
