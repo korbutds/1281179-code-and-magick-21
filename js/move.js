@@ -51,7 +51,7 @@
       document.addEventListener(`mouseup`, onMouseUp);
     });
   };
-  window.translate = {
+  window.move = {
     transformingElement: letTransformElement
   };
 })();
