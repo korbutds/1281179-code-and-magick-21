@@ -47,7 +47,7 @@
     evt.preventDefault();
     window.backend.save(new FormData(form), function () {
       setup.classList.add(`hidden`);
-    });
+    }, window.wizards.errorFragment);
   });
 
 })();
