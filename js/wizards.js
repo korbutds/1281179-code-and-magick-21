@@ -1,5 +1,8 @@
 'use strict';
 (() => {
+  const MAX_WIZARDS = 4;
+  const setup = document.querySelector(`.setup`);
+  const wizardsList = setup.querySelector(`.setup-similar-list`);
   const wizardsTemplate = document.querySelector(`#similar-wizard-template`).content.querySelector(`.setup-similar-item`);
   const wizardsNames = [
     `Иван`,
@@ -48,23 +51,25 @@
   const createWizardElement = (element) => {
     const wizardElement = wizardsTemplate.cloneNode(true);
     wizardElement.querySelector(`.setup-similar-label`).textContent = element.name;
-    wizardElement.querySelector(`.wizard-coat`).style.fill = element.coatColor;
-    wizardElement.querySelector(`.wizard-eyes`).style.fill = element.eyesColor;
+    wizardElement.querySelector(`.wizard-coat`).style.fill = element.colorCoat;
+    wizardElement.querySelector(`.wizard-eyes`).style.fill = element.colorEyes;
 
     return wizardElement;
   };
 
   const creatRandomWizard = createWizardElement(createWizardsDataArray(1));
 
-  const createWizardsFragment = (wizardsCount) => {
+
+  const createWizardsFragment = (wizards) => {
     const fragment = document.createDocumentFragment();
-    const wizardsArray = createWizardsDataArray(wizardsCount);
-    for (let i = 0; i < wizardsArray.length; i++) {
-      fragment.appendChild(createWizardElement(wizardsArray[i]));
+    for (let i = 0; i < MAX_WIZARDS; i++) {
+      fragment.appendChild(createWizardElement(wizards[i]));
     }
 
-    return fragment;
+    wizardsList.appendChild(fragment);
   };
+
+  window.backend.load(createWizardsFragment);
 
   window.wizards = {
     getWizardsFragment: createWizardsFragment,

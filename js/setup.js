@@ -2,7 +2,6 @@
 // Создание списка волшебников
 const setup = document.querySelector(`.setup`);
 const setupAvatar = setup.querySelector(`.upload`);
-const wizardsList = setup.querySelector(`.setup-similar-list`);
 const wizardsCoatsColors = [
   `rgb(101, 137, 164)`,
   `rgb(241, 43, 107)`,
@@ -27,8 +26,6 @@ const fireball = setup.querySelector(`.setup-fireball-wrap`);
 const wizardCoat = setup.querySelector(`.wizard-coat`);
 const wizardEyes = setup.querySelector(`.wizard-eyes`);
 
-
-wizardsList.appendChild(window.wizards.getWizardsFragment(4));
 
 document.querySelector(`.setup-similar`).classList.remove(`hidden`);
 
