@@ -26,12 +26,9 @@ const fireball = setup.querySelector(`.setup-fireball-wrap`);
 const wizardCoat = setup.querySelector(`.wizard-coat`);
 const wizardEyes = setup.querySelector(`.wizard-eyes`);
 
-
 document.querySelector(`.setup-similar`).classList.remove(`hidden`);
-
+window.backend.load(window.wizards.getWizardsFragment, window.wizards.errorFragment);
 window.colorized.changeElementColor(wizardCoat, wizardsCoatsColors, coatInput);
 window.colorized.changeElementColor(wizardEyes, eyesColors, eyesInput);
 window.colorized.changeElementColor(fireball, fireballColor, fireballInput);
-
 window.move.transformingElement(setupAvatar, setup);
-
