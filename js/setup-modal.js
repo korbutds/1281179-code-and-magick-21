@@ -41,4 +41,13 @@
       closeModal(setup);
     }
   });
+
+  const form = setup.querySelector(`.setup-wizard-form`);
+  form.addEventListener(`submit`, function (evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(form), function () {
+      setup.classList.add(`hidden`);
+    }, window.wizards.errorFragment);
+  });
+
 })();
