@@ -15,8 +15,13 @@
   };
 
   const createWizardsFragment = (wizards) => {
+    wizardsList.innerHTML = ``;
     const fragment = document.createDocumentFragment();
-    for (let i = 0; i < MAX_WIZARDS; i++) {
+    let wizardNumber = wizards.length;
+    if (wizards.length > 4) {
+      wizardNumber = MAX_WIZARDS;
+    }
+    for (let i = 0; i < wizardNumber; i++) {
       fragment.appendChild(createWizardElement(wizards[i]));
     }
 
@@ -25,11 +30,30 @@
 
   let wizards = [];
 
-  const successServerFragment = (data) => {
-    wizards = data;
-    createWizardsFragment(data);
+  window.colorObject = {
+    coatColor: `rgb(101, 137, 164)`,
+    eyesColor: `black`,
+    fireballColor: `#eeff30`
   };
 
+  const successServerFragment = (data) => {
+    wizards = data;
+    updateWizards();
+  };
+
+  const updateWizards = () => {
+    const sameCoatWizards = wizards.filter((wizard) => {
+      return wizard.colorCoat === window.colorObject.coatColor;
+    });
+
+    const sameEyesWizards = wizards.filter((wizard) => {
+      return wizard.colorEyes === window.colorObject.eyesColor;
+    });
+
+    const wizardsArray = sameCoatWizards.concat(sameEyesWizards).concat(wizards);
+
+    createWizardsFragment(wizardsArray);
+  };
 
   const errorServerFragment = (errorMessage) => {
     const node = document.createElement(`div`);
@@ -45,6 +69,7 @@
 
   window.render = {
     successFragment: successServerFragment,
-    errorFragment: errorServerFragment
+    errorFragment: errorServerFragment,
+    updateFragment: updateWizards
   };
 })();

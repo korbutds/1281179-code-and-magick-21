@@ -58,7 +58,6 @@
 //   // };
 
 
-
 //   // const createWizardsFragment = (wizards) => {
 //   //   const fragment = document.createDocumentFragment();
 //   //   for (let i = 0; i < MAX_WIZARDS; i++) {

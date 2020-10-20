@@ -11,7 +11,7 @@ const wizardsCoatsColors = [
   `rgb(0, 0, 0)`
 ];
 const eyesColors = [`black`, `red`, `blue`, `yellow`, `green`];
-const fireballColor = [
+const fireballColors = [
   `#ee4830`,
   `#30a8ee`,
   `#5ce6c0`,
@@ -27,8 +27,10 @@ const wizardCoat = setup.querySelector(`.wizard-coat`);
 const wizardEyes = setup.querySelector(`.wizard-eyes`);
 window.backend.load(window.render.successFragment, window.render.errorFragment);
 document.querySelector(`.setup-similar`).classList.remove(`hidden`);
-window.colorized.changeElementColor(wizardCoat, wizardsCoatsColors, coatInput);
-window.colorized.changeElementColor(wizardEyes, eyesColors, eyesInput);
-window.colorized.changeElementColor(fireball, fireballColor, fireballInput);
+
+
+window.colorized.changeElementColor(wizardCoat, wizardsCoatsColors, coatInput, `coatColor`);
+window.colorized.changeElementColor(wizardEyes, eyesColors, eyesInput, `eyesColor`);
+window.colorized.changeElementColor(fireball, fireballColors, fireballInput, `fireballColor`);
 window.move.transformingElement(setupAvatar, setup);
 

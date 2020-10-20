@@ -4,9 +4,17 @@
     return window.util.getRandomArrayElement(array);
   };
 
-  window.colorObject = {};
+  // window.colorObject = {
+  //   coatColor: `#6589a4`,
+  //   eyesColor: `black`,
+  //   fireballColor: `#eeff30`
+  // };
 
-  const letColorChange = (element, array, inputName) => {
+  // window.render.updateWizards = () => {
+  //   window.render.successFragment()
+  // };
+
+  const letColorChange = (element, array, inputName, colorKey) => {
     element.addEventListener(`click`, () => {
       const color = getRandomColor(array);
       if (element.tagName.toLowerCase() === `div`) {
@@ -15,7 +23,8 @@
         element.style.fill = color;
       }
       inputName.value = color;
-      window.colorObject.array = color;
+      window.colorObject[colorKey] = color;
+      window.render.updateFragment();
     });
   };
 
