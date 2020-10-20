@@ -4,6 +4,8 @@
     return window.util.getRandomArrayElement(array);
   };
 
+  window.colorObject = {};
+
   const letColorChange = (element, array, inputName) => {
     element.addEventListener(`click`, () => {
       const color = getRandomColor(array);
@@ -13,6 +15,7 @@
         element.style.fill = color;
       }
       inputName.value = color;
+      window.colorObject.array = color;
     });
   };
 

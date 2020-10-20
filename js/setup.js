@@ -25,7 +25,7 @@ const fireballInput = setupPlayer.querySelector(`input[name = 'fireball-color']`
 const fireball = setup.querySelector(`.setup-fireball-wrap`);
 const wizardCoat = setup.querySelector(`.wizard-coat`);
 const wizardEyes = setup.querySelector(`.wizard-eyes`);
-window.backend.load(window.wizards.successFragment, window.wizards.errorFragment);
+window.backend.load(window.render.successFragment, window.render.errorFragment);
 document.querySelector(`.setup-similar`).classList.remove(`hidden`);
 window.colorized.changeElementColor(wizardCoat, wizardsCoatsColors, coatInput);
 window.colorized.changeElementColor(wizardEyes, eyesColors, eyesInput);
