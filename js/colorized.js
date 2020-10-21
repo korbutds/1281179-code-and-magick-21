@@ -3,17 +3,6 @@
   const getRandomColor = (array) => {
     return window.util.getRandomArrayElement(array);
   };
-
-  // window.colorObject = {
-  //   coatColor: `#6589a4`,
-  //   eyesColor: `black`,
-  //   fireballColor: `#eeff30`
-  // };
-
-  // window.render.updateWizards = () => {
-  //   window.render.successFragment()
-  // };
-
   const letColorChange = (element, array, inputName, colorKey) => {
     element.addEventListener(`click`, () => {
       const color = getRandomColor(array);

@@ -41,18 +41,37 @@
     updateWizards();
   };
 
+  const getRank = (wizard) => {
+    let rank = 0;
+    if (wizard.colorCoat === window.colorObject.coatColor) {
+      rank += 2;
+    }
+
+    if (wizard.colorEyes === window.colorObject.eyesColor) {
+      rank += 1;
+    }
+
+    return rank;
+  };
+
+  const namesComparator = (left, right) => {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    } else {
+      return 0;
+    }
+  };
+
   const updateWizards = () => {
-    const sameCoatWizards = wizards.filter((wizard) => {
-      return wizard.colorCoat === window.colorObject.coatColor;
-    });
-
-    const sameEyesWizards = wizards.filter((wizard) => {
-      return wizard.colorEyes === window.colorObject.eyesColor;
-    });
-
-    const wizardsArray = sameCoatWizards.concat(sameEyesWizards).concat(wizards);
-
-    createWizardsFragment(wizardsArray);
+    createWizardsFragment(wizards.sort((left, right) => {
+      let rankDiff = getRank(right) - getRank(left);
+      if (rankDiff === 0) {
+        rankDiff = namesComparator(left.name, right.name);
+      }
+      return rankDiff;
+    }));
   };
 
   const errorServerFragment = (errorMessage) => {
