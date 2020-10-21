@@ -13,7 +13,7 @@
       }
       inputName.value = color;
       window.colorObject[colorKey] = color;
-      window.debounce(window.render.updateFragment());
+      window.debounce(window.render.updateFragment);
     });
   };
 
