@@ -26,7 +26,7 @@
   const wizardEyes = setup.querySelector(`.wizard-eyes`);
 
 
-  window.colorized.changeElementColor(wizardCoat, wizardsCoatsColors, coatInput, `coatColor`);
+  window.debounce(window.colorized.changeElementColor(wizardCoat, wizardsCoatsColors, coatInput, `coatColor`));
   window.colorized.changeElementColor(wizardEyes, eyesColors, eyesInput, `eyesColor`);
   window.colorized.changeElementColor(fireball, fireballColors, fireballInput, `fireballColor`);
 })();
