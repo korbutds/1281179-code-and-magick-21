@@ -1,57 +1,55 @@
 'use strict';
 
-(() => {
-  const letTransformElement = (element, modal) => {
+const letTransformElement = (element, modal) => {
 
-    element.addEventListener(`mousedown`, (evt) => {
-      evt.preventDefault();
+  element.addEventListener(`mousedown`, (evt) => {
+    evt.preventDefault();
 
-      let startCoords = {
-        x: evt.clientX,
-        y: evt.clientY
+    let startCoords = {
+      x: evt.clientX,
+      y: evt.clientY
+    };
+
+    let moveFlag = false;
+
+    const onMouseMove = (moveEvt) => {
+      moveEvt.preventDefault();
+
+      moveFlag = true;
+
+      const shift = {
+        x: startCoords.x - moveEvt.clientX,
+        y: startCoords.y - moveEvt.clientY
       };
 
-      let moveFlag = false;
+      startCoords = {
+        x: moveEvt.clientX,
+        y: moveEvt.clientY
+      };
 
-      const onMouseMove = (moveEvt) => {
-        moveEvt.preventDefault();
+      modal.style.top = `${modal.offsetTop - shift.y}px`;
+      modal.style.left = `${modal.offsetLeft - shift.x}px`;
 
-        moveFlag = true;
+    };
 
-        const shift = {
-          x: startCoords.x - moveEvt.clientX,
-          y: startCoords.y - moveEvt.clientY
+    const onMouseUp = (upEvt) => {
+      upEvt.preventDefault();
+
+      document.removeEventListener(`mousemove`, onMouseMove);
+      document.removeEventListener(`mouseup`, onMouseUp);
+
+      if (moveFlag) {
+        const onClickPreventDefault = (clickEvt) => {
+          clickEvt.preventDefault();
+          element.removeEventListener(`click`, onClickPreventDefault);
         };
-
-        startCoords = {
-          x: moveEvt.clientX,
-          y: moveEvt.clientY
-        };
-
-        modal.style.top = `${modal.offsetTop - shift.y}px`;
-        modal.style.left = `${modal.offsetLeft - shift.x}px`;
-
-      };
-
-      const onMouseUp = (upEvt) => {
-        upEvt.preventDefault();
-
-        document.removeEventListener(`mousemove`, onMouseMove);
-        document.removeEventListener(`mouseup`, onMouseUp);
-
-        if (moveFlag) {
-          const onClickPreventDefault = (clickEvt) => {
-            clickEvt.preventDefault();
-            element.removeEventListener(`click`, onClickPreventDefault);
-          };
-          element.addEventListener(`click`, onClickPreventDefault);
-        }
-      };
-      document.addEventListener(`mousemove`, onMouseMove);
-      document.addEventListener(`mouseup`, onMouseUp);
-    });
-  };
-  window.move = {
-    transformingElement: letTransformElement
-  };
-})();
+        element.addEventListener(`click`, onClickPreventDefault);
+      }
+    };
+    document.addEventListener(`mousemove`, onMouseMove);
+    document.addEventListener(`mouseup`, onMouseUp);
+  });
+};
+window.move = {
+  transformingElement: letTransformElement
+};
