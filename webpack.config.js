@@ -13,6 +13,7 @@ module.exports = {
     `./js/move.js`,
     `./js/stat.js`,
     `./js/setup.js`,
+    `./js/avator.js`,
     `./js/game.js`
   ],
   output: {
